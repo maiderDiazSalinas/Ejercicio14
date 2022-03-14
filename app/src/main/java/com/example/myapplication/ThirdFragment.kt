@@ -47,9 +47,17 @@ class ThirdFragment : Fragment() {
         } ?: findNavController().navigate(R.id.action_thirdFragment_to_FirstFragment)
 
         binding.boton.setOnClickListener {
-            if ((binding.rgcoche.checkedRadioButtonId != -1)) {
-                (activity as MainActivity).vehiculo = (binding.rgcoche.findViewById(binding.rgcoche.getCheckedRadioButtonId()) as RadioButton).text.toString()
-            }
+            (activity as MainActivity).vehiculo=
+                when {
+                    binding.rbcoche1.isChecked->binding.rbcoche1.text.toString()
+                    binding.rbcoche2.isChecked->binding.rbcoche2.text.toString()
+                    binding.rbcoche3.isChecked->binding.rbcoche3.text.toString()
+                    binding.rbmoto1.isChecked->binding.rbmoto1.text.toString()
+                    binding.rbmoto2.isChecked->binding.rbmoto2.text.toString()
+                    binding.rbmoto3.isChecked->binding.rbmoto3.text.toString()
+                    else->null
+                }
+
             findNavController().navigate(R.id.action_thirdFragment_to_FirstFragment)
         }
     }

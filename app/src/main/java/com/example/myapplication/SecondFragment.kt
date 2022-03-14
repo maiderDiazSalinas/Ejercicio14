@@ -39,12 +39,13 @@ class SecondFragment : Fragment() {
                 || binding.etEdad.text.isEmpty()){
                 Toast.makeText(activity,"No has insertado todos los datos",Toast.LENGTH_LONG).show()
             }
-            else{
-                (activity as MainActivity).nombre=binding.etNombre.text.toString()
-                (activity as MainActivity).apellidos=binding.etApellidos.text.toString()
-                (activity as MainActivity).edad=binding.etEdad.text.toString().toInt()
+            else {
+                (activity as MainActivity).nombre = binding.etNombre.text.toString()
+                (activity as MainActivity).apellidos = binding.etApellidos.text.toString()
+                (activity as MainActivity).edad = binding.etEdad.text.toString().toInt()
+
+                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
             }
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 
