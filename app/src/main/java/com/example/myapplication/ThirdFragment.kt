@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
@@ -33,6 +34,9 @@ class ThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setHasOptionsMenu(true)
+        activity?.title="Comprar"
 
         (activity as MainActivity).edad?.let { it ->
             if (it >= 18) {
@@ -67,5 +71,9 @@ class ThirdFragment : Fragment() {
         _binding = null
     }
 
-
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.action_login)?.isVisible=false
+        menu.findItem(R.id.action_comprar)?.isVisible=false
+    }
 }

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -32,6 +33,9 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setHasOptionsMenu(true)
+        activity?.title="Bienvenido"
+
         if ((activity as MainActivity).nombre!=null
             && (activity as MainActivity).apellidos!=null
             && (activity as MainActivity).edad!=null){
@@ -46,20 +50,36 @@ class FirstFragment : Fragment() {
 
 
         binding.boton1.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            login()
         }
         binding.boton2.setOnClickListener {
-            if(binding.tvDatos.text.isEmpty()){
-                Toast.makeText(activity,"Tienes que insertar primero tus datos",Toast.LENGTH_LONG).show()
-            }
-            else {
-                findNavController().navigate(R.id.action_FirstFragment_to_thirdFragment)
-            }
+            comprar()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun login(){
+        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+    }
+
+    private fun comprar(){
+        if(binding.tvDatos.text.isEmpty()){
+            Toast.makeText(activity,"Tienes que insertar primero tus datos",Toast.LENGTH_LONG).show()
+        }
+        else {
+            findNavController().navigate(R.id.action_FirstFragment_to_thirdFragment)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_login -> login()
+            R.id.action_comprar -> comprar()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
